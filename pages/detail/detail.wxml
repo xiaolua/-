@@ -1,0 +1,50 @@
+<!--pages/detail/detail.wxml-->
+<!-- 这里是商品详情页 -->
+<view>
+  <!-- 1.0 轮播图 -->
+  <swiper indicator-dots circular autoplay interval="{{3000}}" duration="{{1000}}">
+    <block wx:for="{{shop.images}}" wx:key="*this">
+      <swiper-item>
+        <image bindtap="preview" data-img-url="{{item}}" src="{{item}}" />
+      </swiper-item>
+    </block>
+  </swiper>
+  <!-- 2.0 内容简介 -->
+  <view class="decription">
+    <text class="name">{{shop.name}}</text>
+    <text>电话：{{shop.phone}}</text>
+    <text>地址：{{shop.address}}</text>
+    <text>营业时间：{{shop.businessHours}}</text>
+    <view class="score">{{shop.score}}</view>
+  </view>
+   <!-- 3.0 评论部分 -->
+  <view wx:key="item.id" class="comment" wx:for="{{shop.comments}}">
+    <text class="name">{{item.name}}</text>
+    <text class="date">{{item.date}}</text>
+    <text class="rating">{{item.rating}}</text>
+    <text>{{item.content}}</text>
+    <view class="images">
+    <!-- 图片的返回路径是 -->
+    <!-- {{item.images}}
+      http://p0.meituan.net/w.h/shaitu/61222500f1ac5a164ea7933d3c9b8f8578059.jpg    -->
+      <!-- w.h要设置宽高 -->
+      <!-- 在这里要设置一个过滤器，用来替换w.h -->
+      <!-- {{item}} -->
+      <image wx:key="*this" wx:for="{{item.images}}" src="{{m1.replaceURL(item)}}"></image>
+    </view>
+  </view>
+</view>
+
+<!-- originURL传入路径 -->
+<!-- replaceURL方法名 -->
+<!-- 思路：先接受原本的路径 然后把原本路径的w.h替换成缩略图的宽高 -->
+
+<wxs module='m1'>
+  function replaceURL(originURL){
+    return originURL.replace('w.h','200.200')
+  }
+
+  module.exports = {
+    replaceURL:replaceURL
+  }
+</wxs>

@@ -1,0 +1,28 @@
+
+<!--pages/home/home.wxml-->
+<view>
+<!-- 轮播图区域 -->
+<swiper indicator-dots="{{true}}" autoplay="{{true}}" interval="{{3000}}" duration="{{duration}}" indicator-dots="#fff" circular="true">
+  <block wx:for="{{swipers}}" wx:key="item.id">
+    <swiper-item>
+      <image src="{{item.image}}" class="slide-image" />
+    </swiper-item>
+  </block>
+</swiper>
+
+<!-- 九宫格区域 -->
+<view class="weui-grids">
+  <block wx:for="{{categories}}" wx:key="{{item.id}}">
+    <navigator url="/pages/list/list?cate_id={{item.id}}&name={{item.name}}"  class="weui-grid" hover-class="weui-grid_active">
+      <image class="weui-grid__icon" src="{{item.icon}}" />
+      <view class="weui-grid__label">{{item.name}}</view>
+    </navigator>
+  </block>
+</view>
+<!-- 广告区域 -->
+ <!-- 3.0 广告 -->
+  <view class="friends">
+    <image class="left" src="/assets/link-01.png"></image>
+    <image class="right" src="/assets/link-02.png"></image>
+  </view>
+</view>
